@@ -1,0 +1,21 @@
+let metadata = [];
+
+    allNFTs.map(async (e) => {
+      if (e.metadata) {
+        metadata.push(JSON.parse(e.metadata).attributes);
+      } else {
+        let config = {
+          method: "get",
+          url: `http://localhost:3000/api/fetch`,
+          header: {
+            "Content-Type": "application/json",
+          },
+        };
+        const res = await axios(config);
+        const attr = res.data.attributes;
+        metadata.push(attr);
+        console.log(metadata); // this one worked after below
+      }
+    });
+
+    console.log(metadata); // this one worked before above
